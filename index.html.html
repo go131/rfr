@@ -1,0 +1,418 @@
+<html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>포비딸기 주문서</title>
+  <style>
+    body {
+      background-color: #fdebeb;
+      font-family: 'Noto Sans KR', sans-serif;
+      padding: 40px;
+      color: #333;
+    }
+    .form-box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #e63950;
+      margin-bottom: 30px;
+    }
+    .item {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .item-name {
+      flex: 1;
+    }
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .qty {
+      width: 30px;
+      text-align: center;
+      font-weight: bold;
+    }
+    button {
+      padding: 5px 10px;
+      background-color: #e63950;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #c2185b;
+    }
+    .total {
+      text-align: right;
+      font-size: 18px;
+      margin-top: 30px;
+      font-weight: bold;
+    }
+    .input-group {
+      margin-top: 25px;
+    }
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .input-group input,
+    .input-group select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .account-info {
+      margin-top: 25px;
+      font-size: 15px;
+      color: #333;
+      text-align: center;
+    }
+    .submit-box {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .submit-box button {
+      padding: 10px 20px;
+      background-color: #e63950;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .submit-box button:hover {
+      background-color: #c2185b;
+    }
+    .location-options {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.location-options label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap; /* 👈 글자가 줄바꿈되지 않도록 설정 */
+}
+
+.submit-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.note {
+  font-size: 13px;
+  color: #666;
+}
+
+.pickup-note {
+  font-size: 13px;
+  color: #666;
+}
+.location-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+.location-list label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+.time-note {
+  font-size: 13px;
+  color: #666;
+}
+.location-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.location-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+}
+
+.location-info {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.location-name {
+  font-weight: 500;
+}
+
+.time-note {
+  color: #666;
+  font-size: 13px;
+}
+
+.location-option input[type="radio"] {
+  transform: scale(1.2);
+}
+.location-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.location-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fdfdfd;
+  font-size: 14px;
+}
+
+.location-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.location-option input[type="radio"] {
+  transform: scale(1.2);
+}
+.location-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.location-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fdfdfd;
+  font-size: 14px;
+}
+
+.location-text {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  flex-wrap: nowrap;
+  overflow: visible;
+}
+
+.location-name {
+  font-weight: 500;
+}
+
+.time-note {
+  font-size: 13px;
+  color: #888; /* 연한 회색 */
+}
+
+.location-option input[type="radio"] {
+  transform: scale(1.2);
+}
+.location-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fdfdfd;
+  font-size: 14px;
+}
+
+.location-text {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+  width: 100%; /* 전체 너비 확보 */
+  max-width: 350px; /* ✅ 고정 너비로 정렬 안정화 */
+}
+
+.location-name {
+  font-weight: 500;
+}
+
+.time-note {
+  font-size: 13px;
+  color: #888;
+}
+
+.location-option input[type="radio"] {
+  transform: scale(1.2);
+  margin-left: 10px;
+}
+  </style>
+</head>
+<body>
+  <div class="form-box">
+    <h2>🍓 포비딸기 주문서</h2>
+
+    <!-- 상품 항목 -->
+    <div class="item" data-price="20000">
+      <div class="item-name">딸기 1호 (₩20,000)</div>
+      <div class="qty-controls">
+        <button onclick="changeQty(this, -1)">–</button>
+        <span class="qty">0</span>
+        <button onclick="changeQty(this, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="item" data-price="18000">
+      <div class="item-name">딸기 2호 (₩18,000)</div>
+      <div class="qty-controls">
+        <button onclick="changeQty(this, -1)">–</button>
+        <span class="qty">0</span>
+        <button onclick="changeQty(this, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="item" data-price="15000">
+      <div class="item-name">딸기 3호 (₩15,000)</div>
+      <div class="qty-controls">
+        <button onclick="changeQty(this, -1)">–</button>
+        <span class="qty">0</span>
+        <button onclick="changeQty(this, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="item" data-price="12000">
+      <div class="item-name">딸기 4호 (₩12,000)</div>
+      <div class="qty-controls">
+        <button onclick="changeQty(this, -1)">–</button>
+        <span class="qty">0</span>
+        <button onclick="changeQty(this, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="item" data-price="10000">
+      <div class="item-name">딸기 5호 (₩10,000)</div>
+      <div class="qty-controls">
+        <button onclick="changeQty(this, -1)">–</button>
+        <span class="qty">0</span>
+        <button onclick="changeQty(this, 1)">+</button>
+      </div>
+    </div>
+
+    <!-- 총 가격 -->
+    <div class="total">총 가격: <span id="total">₩0</span></div>
+
+<!-- 수령지 선택 (세로 배치 + 개별 안내) -->
+<div class="input-group">
+  <label>수령지 선택</label>
+  <div class="location-list">
+    <label class="location-option">
+      <div class="location-text">
+        <span class="location-name">하삼동</span>
+        <span class="time-note">(수령가능시간: 14~17시)</span>
+      </div>
+      <input type="radio" name="location" value="하삼동">
+    </label>
+
+    <label class="location-option">
+      <div class="location-text">
+        <span class="location-name">뚜레주르</span>
+        <span class="time-note">(수령가능시간: 13~16시)</span>
+      </div>
+      <input type="radio" name="location" value="뚜레주르">
+    </label>
+
+    <label class="location-option">
+      <div class="location-text">
+        <span class="location-name">집앞</span>
+        <span class="time-note">(수령가능시간: 15~18시)</span>
+      </div>
+      <input type="radio" name="location" value="집앞">
+    </label>
+  </div>
+</div>
+
+    <!-- 입금자명 -->
+    <div class="input-group">
+      <label for="payer">입금자명</label>
+      <input type="text" id="payer" placeholder="입금자명을 입력하세요">
+    </div>
+
+    <!-- 연락처 -->
+    <div class="input-group">
+      <label for="phone">연락처</label>
+      <input type="text" id="phone" placeholder="010-1234-5678">
+    </div>
+
+    <!-- 계좌번호 -->
+    <div class="account-info">
+      💳 입금 계좌: 농협 123-4567-8901 홍길동
+    </div>
+
+   <!-- 저장 버튼과 안내 문구 -->
+<div class="submit-box">
+  <div class="submit-row">
+    <div class="note">*카드결제는 대면결제 가능함</div>
+    <button type="button" onclick="saveOrder()">저장하기</button>
+  </div>
+</div>
+
+  <script>
+    function changeQty(button, delta) {
+      const item = button.closest('.item');
+      const qtySpan = item.querySelector('.qty');
+      let qty = parseInt(qtySpan.textContent);
+      qty = Math.max(0, qty + delta);
+      qtySpan.textContent = qty;
+      updateTotal();
+    }
+
+    function updateTotal() {
+      let total = 0;
+      document.querySelectorAll('.item').forEach(item => {
+        const price = parseInt(item.dataset.price);
+        const qty = parseInt(item.querySelector('.qty').textContent);
+        total += price * qty;
+      });
+      document.getElementById('total').textContent = `₩${total.toLocaleString()}`;
+    }
+
+    function saveOrder() {
+      alert("주문이 저장되었습니다! 🎉");
+    }
+  </script>
+</body>
+</html>
